@@ -1,0 +1,14 @@
+name: SignEdit
+author: jjm_223
+version: 1.0-SNAPSHOT
+main: me.jjm_223.signedit.SignEdit
+commands:
+  signedit:
+    description: Changes a line of the sign you are looking at to the message you specify.
+    usage: /signedit <line> <message>
+  signundo:
+    description: Undoes the last sign change you've done with this plugin.
+    usage: /signundo
+  signredo:
+    description: Redoes your last undo.
+    usage: /signredo
