@@ -22,7 +22,7 @@ public class CommandSignUndo implements CommandExecutor {
         if (SignEdit.getSignEditPlayer(((Player) commandSender)).undo()) {
             commandSender.sendMessage(ChatColor.GREEN + "Undone.");
         } else {
-            commandSender.sendMessage(ChatColor.RED + "There's nothing to undo!");
+            commandSender.sendMessage(ChatColor.RED + "You cannot undo anything.");
         }
 
         return true;

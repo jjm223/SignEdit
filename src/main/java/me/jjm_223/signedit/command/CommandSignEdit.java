@@ -65,9 +65,12 @@ public class CommandSignEdit implements CommandExecutor {
         String[] newStrings = sign.getLines();
         newStrings[lineNumber - 1] = ChatColor.translateAlternateColorCodes('&', messageBuilder.toString());
         SignEdit.getSignEditPlayer(player).addEdit(sign.getLocation(), oldStrings, newStrings);
-        sign.update();
+        if (SignEdit.updateSign(player, block, newStrings)) {
+            commandSender.sendMessage(ChatColor.GREEN + "Sign updated.");
+        } else {
+            commandSender.sendMessage(ChatColor.RED + "You are not able to modify this sign.");
+        }
 
-        commandSender.sendMessage(ChatColor.GREEN + "Sign updated.");
         return true;
     }
 }

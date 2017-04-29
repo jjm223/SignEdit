@@ -16,10 +16,10 @@ public class SignEditPlayer {
     }
 
     public boolean undo() {
-        return changeList.undo();
+        return changeList.undo(handle);
     }
 
     public boolean redo() {
-        return changeList.redo();
+        return changeList.redo(handle);
     }
 }

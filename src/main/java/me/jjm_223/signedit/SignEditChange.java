@@ -2,7 +2,7 @@ package me.jjm_223.signedit;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Sign;
+import org.bukkit.entity.Player;
 
 public class SignEditChange {
     private String[] oldLines;
@@ -15,31 +15,15 @@ public class SignEditChange {
         this.signLocation = sign;
     }
 
-    public boolean redo() {
-        if (signLocation.getBlock().getType() == Material.WALL_SIGN || signLocation.getBlock().getType() == Material.SIGN_POST) {
-            Sign sign = ((Sign) signLocation.getBlock().getState());
-            for (int x = 0; x < newLines.length; x++) {
-                sign.setLine(x, newLines[x]);
-            }
-
-            sign.update();
-            return true;
-        }
-
-        return false;
+    public boolean redo(Player player) {
+        return (signLocation.getBlock().getType() == Material.WALL_SIGN
+                || signLocation.getBlock().getType() == Material.SIGN_POST)
+                && SignEdit.updateSign(player, signLocation.getBlock(), newLines);
     }
 
-    public boolean undo() {
-        if (signLocation.getBlock().getType() == Material.WALL_SIGN || signLocation.getBlock().getType() == Material.SIGN_POST) {
-            Sign sign = ((Sign) signLocation.getBlock().getState());
-            for (int x = 0; x < oldLines.length; x++) {
-                sign.setLine(x, oldLines[x]);
-            }
-
-            sign.update();
-            return true;
-        }
-
-        return false;
+    public boolean undo(Player player) {
+        return (signLocation.getBlock().getType() == Material.WALL_SIGN
+                || signLocation.getBlock().getType() == Material.SIGN_POST)
+                && SignEdit.updateSign(player, signLocation.getBlock(), oldLines);
     }
 }

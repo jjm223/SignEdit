@@ -22,7 +22,7 @@ public class CommandSignRedo implements CommandExecutor {
         if (SignEdit.getSignEditPlayer(((Player) commandSender)).redo()) {
             commandSender.sendMessage(ChatColor.GREEN + "Redone.");
         } else {
-            commandSender.sendMessage(ChatColor.RED + "There's nothing to redo!");
+            commandSender.sendMessage(ChatColor.RED + "You cannot redo anything.");
         }
 
         return true;

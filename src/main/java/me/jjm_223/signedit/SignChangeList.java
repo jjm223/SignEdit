@@ -1,5 +1,7 @@
 package me.jjm_223.signedit;
 
+import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,21 +15,29 @@ public class SignChangeList {
         history.add(0, change);
     }
 
-    public boolean undo() {
+    public boolean undo(Player player) {
         if (history.size() == 0 || history.size() <= position) {
             return false;
         }
-        history.get(position).undo();
-        position++;
-        return true;
+
+        if (history.get(position).undo(player)) {
+            ++position;
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public boolean redo() {
+    public boolean redo(Player player) {
         if (position <= 0) {
             return false;
         }
-        position--;
-        history.get(position).redo();
-        return true;
+
+        if (history.get(position - 1).redo(player)) {
+            --position;
+            return true;
+        } else {
+            return false;
+        }
     }
 }
